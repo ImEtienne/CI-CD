@@ -42,6 +42,9 @@ jobs:
         env:
            KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
+      - name: Afficher la configuration (debug)
+        run: cat $HOME/.kube/config
+
       - name: Verify kubectl connectivity
         run: kubectl cluster-info
 
