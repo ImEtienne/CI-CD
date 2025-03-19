@@ -34,4 +34,12 @@ jobs:
       - name: Déployer sur Kubernetes
         run: |
           kubectl set image deployment/hello-world-node hello-world-node=kibongani/hello-world-node:latest --record
-        
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+
+      - name: Verify kubectl connectivity
+        run: kubectl cluster-info
+
+      - name: Deploy application
+        run: |
+          kubectl set image deployment/hello-world-node hello-world-node=kibongani/hello-world-node:latest
