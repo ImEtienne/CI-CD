@@ -47,7 +47,3 @@ jobs:
 
       - name: Verify kubectl connectivity
         run: kubectl cluster-info
-
-      - name: Deploy application
-        run: |
-          kubectl set image deployment/hello-world-node hello-world-node=kibongani/hello-world-node:latest
