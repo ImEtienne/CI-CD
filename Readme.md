@@ -99,6 +99,19 @@ L'objectif de ce TP était de :
   C'est une première réussie pour moi avec un déploiement sur un cluster kind, démontrant que même avec des contraintes (ex. LoadBalancer non supporté), des solutions comme le NodePort permettent d'adapter le déploiement à l'environnement local.
 
 ---
+# capture d'écran 
+success
+<img width="923" alt="deploy-successfull" src="https://github.com/user-attachments/assets/d6c04f9f-7001-474b-a064-1644a481eff2" />
+
+error du deploy
+<img width="923" alt="error_deploy" src="https://github.com/user-attachments/assets/d35fe0f9-0f6f-4faf-99f7-ee3e8ea63d3d" />
+
+refus
+<img width="922" alt="error-refus" src="https://github.com/user-attachments/assets/ee56dc54-f694-40ed-9156-dea4de3d4d7e" />
+
+
+
+---
 
 ## 📚 Ressources Utiles
 
