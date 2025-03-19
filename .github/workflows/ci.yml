@@ -28,22 +28,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: azure/setup-kubectl@v3
         with:
           version: 'latest'
-      - name: Déployer sur Kubernetes
+
+      - name: Installer Kind
         run: |
-          kubectl set image deployment/hello-world-node hello-world-node=kibongani/hello-world-node:latest
-        
-      - name: Configure kubeconfig
-        run: |
-            mkdir -p $HOME/.kube
-            echo "$KUBECONFIG" > $HOME/.kube/config
-        env:
-           KUBECONFIG: ${{ secrets.KUBECONFIG }}
+          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.17.0/kind-linux-amd64
+          chmod +x ./kind
+          sudo mv ./kind /usr/local/bin/kind
+
+      - name: Créer un cluster Kind
+        run: kind create cluster
+
+      - name: Vérifier la connectivité du cluster
+        run: kubectl cluster-info
+
+      #- name: Configure kubeconfig
+      #  run: |
+      #      mkdir -p $HOME/.kube
+      #      echo "$KUBECONFIG" > $HOME/.kube/config
+      #  env:
+      #     KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
       - name: Afficher la configuration (debug)
         run: cat $HOME/.kube/config
 
       - name: Verify kubectl connectivity
         run: kubectl cluster-info
+
+      - name : déployer l'application
+        run : |
+          kubectl apply -f deployment.yaml
+
+      - name: Déployer sur Kubernetes
+        run: |
+          kubectl set image deployment/hello-world-node hello-world-node=kibongani/hello-world-node:latest
