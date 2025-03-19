@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: hello-world-node-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: hello-world-node
   ports:
     - protocol: TCP
       port: 80
-      targetPort: 3000
+      targetPort: 80
+      nodePort: 30080
