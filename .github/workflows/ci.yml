@@ -34,8 +34,13 @@ jobs:
       - name: Déployer sur Kubernetes
         run: |
           kubectl set image deployment/hello-world-node hello-world-node=kibongani/hello-world-node:latest --record
+        
+      - name: Configure kubeconfig
+        run: |
+            mkdir -p $HOME/.kube
+            echo "$KUBECONFIG" > $HOME/.kube/config
         env:
-          KUBECONFIG: ${{ secrets.KUBECONFIG }}
+           KUBECONFIG: ${{ secrets.KUBECONFIG }}
 
       - name: Verify kubectl connectivity
         run: kubectl cluster-info
