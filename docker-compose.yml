@@ -1,0 +1,30 @@
+version: '3'
+services:
+  redis:
+    image: redis
+    networks:
+      - redis
+
+  redis-node:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - PORT=8080
+    ports:
+      - '8080:8080'
+    depends_on:
+      - redis
+    networks:
+      - redis
+
+  redis-react:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3001:80'
+networks:
+  redis:
+    driver: bridge

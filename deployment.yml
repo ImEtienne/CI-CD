@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-node
+spec:
+  selector:
+    matchLabels:
+      app: hello-world-node
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello-world-node
+    spec:
+      containers:
+      - name: hello-world-node
+        image: kibongani/hello-world-node
+        ports:
+          - containerPort: 3000
